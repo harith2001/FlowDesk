@@ -42,6 +42,12 @@ class AuditLogMixin:
             # Represent related fields by their primary key
             if isinstance(field, (models.ForeignKey, models.OneToOneField)):
                 value = getattr(value, "pk", None)
+            # Convert datetime/date to ISO string for JSON serialization
+            elif isinstance(field, (models.DateTimeField, models.DateField)):
+                value = value.isoformat() if value else None
+            # Convert Decimal to string for JSON serialization
+            elif isinstance(field, models.DecimalField):
+                value = str(value) if value is not None else None
             data[name] = value
         return data
 

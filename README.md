@@ -23,7 +23,9 @@ It is designed as a **portfolio-grade mini SaaS** that showcases:
 - **Frontend**: React (separate SPA)  
 - **Deployment**: Docker + Nginx  
 
-## Local Development (Backend)
+## Local Development
+
+### Backend Setup
 
 From the project root (`FlowDesk`):
 
@@ -38,7 +40,23 @@ python manage.py createsuperuser
 python manage.py runserver
 ```
 
+The backend will run on `http://localhost:8000` by default.
+
 By default the backend uses **SQLite** for easy local setup, but `config/settings.py` includes a PostgreSQL-ready configuration you can switch to with environment variables.
+
+### Frontend Setup
+
+From the `frontend` directory:
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+The frontend will run on `http://localhost:3000` by default and proxy API requests to the backend.
+
+**Note**: Make sure the Django backend is running before starting the frontend.
 
 ## High-Level Backend Structure
 
